@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, Button, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TextInput, Button, View, TouchableOpacity, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import React, { useState } from 'react';
 import Card from '../components/Card';
 
-export default function StartScreen() {
+export default function StartScreen( {onRegister} ) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -57,6 +57,21 @@ export default function StartScreen() {
     setNameError('');
     setEmailError('');
     setPhoneNumError('');
+  }
+
+  function handleRegisterPress () {
+    if (
+      nameError 
+      || emailError 
+      || phoneNumError
+      || !name
+      || !email
+      || !phoneNum
+    ) {
+      Alert.alert("Invalid Input", 'Please check the input values');
+    } else {
+      onRegister(name, email, phoneNum);
+    }
   }
 
   return (
@@ -113,6 +128,7 @@ export default function StartScreen() {
               { backgroundColor: isChecked ? '#0000FF' : '#ccc' }
             ]}
             disabled={!isChecked}
+            onPress={handleRegisterPress}
           >
             <Text style={styles.registerButtonText}>Register</Text>
           </TouchableOpacity>

@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import Header from './components/Header';
 import StartScreen from './screens/StartScreen';
+import ConfirmScreen from './screens/ConfirmScreen';
+import GameScreen from './screens/GameScreen';
 
 export default function App() {
 
@@ -10,12 +12,20 @@ export default function App() {
 
   const [currentScreen, setCurrentScreen] = useState('start');
 
+  // handle registration
+  const handleRegister = (userInfo) => {
+    setCurrentScreen('confirm');
+  };
+
+  // navigate between screens
   const navigateScreen = (screen) => {
-    switch (currentScreen) {
+    switch (screen) {
       case 'start':
-        return <StartScreen />;
-      default:
-        return <StartScreen />;
+        return <StartScreen onRegister={handleRegister} />;
+      case 'confirm':
+        return <ConfirmScreen />;
+      case 'game':
+        return <GameScreen />;
     }
   }
 
@@ -28,8 +38,7 @@ export default function App() {
 
       <View style={styles.mainArea}>
         {navigateScreen(currentScreen)}
-      <StatusBar style="auto" />
-    </View>
+      </View>
     </ SafeAreaView>
 
     
