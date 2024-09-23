@@ -13,8 +13,6 @@ const styles = StyleSheet.create({
   textStyle: {
     color: 'purple',
     fontSize: 25,
-    // borderColor: 'purple',
-    // borderWidth: 2,
     padding: 5,
     marginBottom: 10,
   }

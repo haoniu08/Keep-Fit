@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, Button, View, TouchableOpacity } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import React, { useState } from 'react';
+import Card from '../components/Card';
 
 export default function StartScreen() {
 
@@ -12,7 +13,7 @@ export default function StartScreen() {
 
   return (
     <View style={styles.screen}>
-      <View style={styles.card}>
+      <Card style={styles.card}>
         {/* Name Input */}
         <Text style={styles.label}>Name</Text>
         <TextInput
@@ -65,11 +66,60 @@ export default function StartScreen() {
             <Text style={styles.registerButtonText}>Register</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </Card>
 
       <StatusBar style="auto" />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'skyblue',
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 15,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  checkbox: {
+    marginRight: 10,
+  },
+  checkboxLabel: {
+    fontSize: 16,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  resetButton: {
+    backgroundColor: '#ff0000',
+    padding: 10,
+    borderRadius: 5,
+  },
+  resetButtonText: {
+    color: '#fff',
+  },
+  registerButton: {
+    padding: 10,
+    borderRadius: 5,
+  },
+  registerButtonText: {
+    color: '#fff',
+  },
+});

@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   },
   mainArea: {
     flex: 5,
+    width: '100%',
     backgroundColor: 'skyblue',
     alignItems: 'center',
     justifyContent: 'center',
