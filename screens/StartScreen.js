@@ -11,6 +11,54 @@ export default function StartScreen() {
   const [phoneNum, setPhoneNum] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
+  // error states
+  const [nameError, setNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [phoneNumError, setPhoneNumError] = useState('');
+
+  // input validation
+  function validateName (text) {
+    if (!/^[a-zA-Z ]+$/.test(text) || text.length < 2) {
+      setNameError('Name must be at least 2 characters long non-numeric');
+    } else {
+      setNameError('');
+    }
+    setName(text);
+  }
+
+  function validateEmail (text) {
+    if (!/^\S+@\S+\.\S+$/.test(text)) {
+      setEmailError('Invalid email format');
+    } else {
+      setEmailError('');
+    }
+    setEmail(text);
+  }
+
+  function validatePhoneNum (text) {
+    if (
+      text.length !== 10 
+      || isNaN(text) 
+      || text.charAt(text.length - 1) === '0' 
+      || text.charAt(text.length - 1) === '1') {
+        setPhoneNumError('Invalid phone number');
+      } else {
+        setPhoneNumError('');
+      }
+    setPhoneNum(text);
+  }
+
+  // reset button
+  function handleReset () {
+    setName('');
+    setEmail('');
+    setPhoneNum('');
+    setIsChecked(false);
+    setNameError('');
+    setEmailError('');
+    setPhoneNumError('');
+  }
+
   return (
     <View style={styles.screen}>
       <Card style={styles.card}>
@@ -19,27 +67,30 @@ export default function StartScreen() {
         <TextInput
           style={styles.input}
           placeholder="Please enter your name"
-          onChangeText={text => setName(text)}
+          onChangeText={validateName}
           value={name}
         />
+        {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
 
         {/* Email Input */}
         <Text style={styles.label}>Email address</Text>
         <TextInput
           style={styles.input}
           placeholder="Please enter your email"
-          onChangeText={text => setEmail(text)}
+          onChangeText={validateEmail}
           value={email}
         />
+        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
         {/* Phone Number Input */}
         <Text style={styles.label}>Phone Number</Text>
         <TextInput
           style={styles.input}
           placeholder="Please Enter your phone number"
-          onChangeText={text => setPhoneNum(text)}
+          onChangeText={validatePhoneNum}
           value={phoneNum}
         />
+        {phoneNumError ? <Text style={styles.errorText}>{phoneNumError}</Text> : null}
 
         {/* Checkbox */}
         <View style={styles.checkboxContainer}>
@@ -53,7 +104,7 @@ export default function StartScreen() {
 
         {/* Buttons */}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.resetButton}>
+          <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
             <Text style={styles.resetButtonText}>Reset</Text>
           </TouchableOpacity>
           <TouchableOpacity

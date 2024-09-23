@@ -8,11 +8,11 @@ export default function Card({ children, style }) {
 const styles = StyleSheet.create({
     card: {
         width: '75%',
-        height: '50%',
+        height: 'auto',
         borderRadius: 10,
         backgroundColor: '#fff',
-        shadowColor: '#434343',
-        shadowOffset: { width: 0, height: 2 },
+        shadowColor: '#black',
+        shadowOffset: { width: 3, height: 3 },
         shadowOpacity: 0.8,
         shadowRadius: 3,
         elevation: 5, // For Android shadow
