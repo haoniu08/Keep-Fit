@@ -3,20 +3,19 @@ import { View, Text, Modal, StyleSheet } from 'react-native';
 import Card from '../components/Card';
 import Button from '../components/Button';
 
-export default function ConfirmScreen({ isVisible, userInfo}) {
+export default function ConfirmScreen({ isVisible, userInfo, onGoBack, onContinue }) {
   return (
     <View>
       <Modal visible={isVisible} transparent>
         <View style={styles.centeredView}>
           <Card>
-            <Text>Hello {userInfo.name}</Text>
-            <Text>Here is the information you entered:</Text>
-            <Text>{userInfo.email}</Text>
-            <Text>{userInfo.phoneNum}</Text>
-            <Text>If it is not correct, please go back and edit then</Text>
-
-            <Button title="Go back" onPress={() => setVisible(false)} />
-            <Button title="Continue" />
+            <Text style={styles.text}>Hello {userInfo.name}</Text>
+            <Text style={styles.text}>Here is the information you entered:</Text>
+            <Text style={styles.text}>{userInfo.email}</Text>
+            <Text style={styles.text}>{userInfo.phoneNum}</Text>
+            <Text style={styles.text}>If it is not correct, please go back and edit then</Text>
+            <Button title="Go back" onPress={onGoBack} />
+            <Button title="Continue" onPress={onContinue}/>
           </Card> 
         </View>
       </Modal>

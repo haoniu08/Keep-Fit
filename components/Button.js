@@ -15,7 +15,8 @@ const Button = ({ onPress, title, disabled }) => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: 'blue',
+        flexDirection: 'row',
+        backgroundColor: 'skyblue',
         padding: 10,
         margin: 10,
         borderRadius: 5,

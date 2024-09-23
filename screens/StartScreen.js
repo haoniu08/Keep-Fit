@@ -70,7 +70,12 @@ export default function StartScreen( {onRegister} ) {
     ) {
       Alert.alert("Invalid Input", 'Please check the input values');
     } else {
-      onRegister(name, email, phoneNum);
+      const userInfo = {
+        name: name,
+        email: email,
+        phoneNum: phoneNum
+      }
+      onRegister(userInfo);
     }
   }
 
