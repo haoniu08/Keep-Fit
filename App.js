@@ -11,21 +11,35 @@ export default function App() {
   const appName = "The Guessing Game";
 
   const [currentScreen, setCurrentScreen] = useState('start');
+  const [userInfo, setUserInfo] = useState({});
+  const [isConfirmVisible, setIsConfirmVisible] = useState(false);
 
   // handle registration
   const handleRegister = (userInfo) => {
-    setCurrentScreen('confirm');
+    setUserInfo(userInfo);
+    setIsConfirmVisible(true);
   };
+
+  const handleGoBack = () => {
+    setIsConfirmVisible(false);
+    setCurrentScreen('start');
+  };
+
+  const handleContinue = () => {
+    setIsConfirmVisible(false);
+    setCurrentScreen('game');
+  }
+
 
   // navigate between screens
   const navigateScreen = (screen) => {
     switch (screen) {
       case 'start':
-        return <StartScreen onRegister={handleRegister} />;
-      case 'confirm':
-        return <ConfirmScreen />;
+        return <StartScreen onRegister={handleRegister} userInfo={userInfo}/>;
       case 'game':
         return <GameScreen />;
+      default:
+        return <StartScreen onRegister={handleRegister} userInfo={userInfo}/>;
     }
   }
 
@@ -38,6 +52,12 @@ export default function App() {
 
       <View style={styles.mainArea}>
         {navigateScreen(currentScreen)}
+        <ConfirmScreen 
+          isVisible={isConfirmVisible} 
+          userInfo={userInfo}
+          onGoBack={handleGoBack}
+          onContinue={handleContinue}
+        />
       </View>
     </ SafeAreaView>
 
