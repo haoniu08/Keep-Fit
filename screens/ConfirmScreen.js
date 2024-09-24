@@ -14,8 +14,10 @@ export default function ConfirmScreen({ isVisible, userInfo, onGoBack, onContinu
             <Text style={styles.text}>{userInfo.email}</Text>
             <Text style={styles.text}>{userInfo.phoneNum}</Text>
             <Text style={styles.text}>If it is not correct, please go back and edit then</Text>
-            <Button title="Go back" onPress={onGoBack} />
-            <Button title="Continue" onPress={onContinue}/>
+            <View style={styles.buttonContainer}>
+              <Button title="Go back" onPress={onGoBack} customStyle={styles.goBackButton}/>
+              <Button title="Continue" onPress={onContinue} customStyle={styles.continueButton}/>
+            </View>
           </Card> 
         </View>
       </Modal>
@@ -28,6 +30,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  goBackButton: {
+    backgroundColor: '#ff0000', // Red
+    flex: 1,
+    marginRight: 10,
+    padding: 10,
+    alignItems: 'center',
+  },
+  continueButton: {
+    backgroundColor: '#0000FF', // Blue
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
   },
 });

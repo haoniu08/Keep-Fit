@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const Button = ({ onPress, title, disabled }) => {
+const Button = ({ onPress, title, disabled, customStyle }) => {
     return (
         <TouchableOpacity
             style={[styles.button, disabled ? styles.disabled : {}]}
@@ -15,14 +15,12 @@ const Button = ({ onPress, title, disabled }) => {
 
 const styles = StyleSheet.create({
     button: {
-        flexDirection: 'row',
-        backgroundColor: 'skyblue',
         padding: 10,
         margin: 10,
         borderRadius: 5,
     },
     buttonText: {
-        color: 'white',
+        // color: 'white',
         fontSize: 20,
         textAlign: 'center',
     },
