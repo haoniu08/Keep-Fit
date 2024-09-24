@@ -36,7 +36,7 @@ export default function App() {
       case 'start':
         return <StartScreen onRegister={handleRegister} userInfo={userInfo}/>;
       case 'game':
-        return <GameScreen />;
+        return <GameScreen phoneNum={userInfo.phoneNum} onRestart={handleGoBack}/>;
       default:
         return <StartScreen onRegister={handleRegister} userInfo={userInfo}/>;
     }
