@@ -1,11 +1,17 @@
-// a basis for the game screen
-
-import React, { useState } from 'react';
-import { View, Text, Modal, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import { generateTarget, checkGuess, checkGameOver } from '../utils/gameLogic';
 import Card from '../components/Card';
 import Button from '../components/Button';
 
-export default function GameScreen() {
+export default function GameScreen( phoneNum, onRestart) {
+
+    const [gameState, setGameState] = useState("initial");
+    const [targetNum, setTargetNum] = useState(null);
+    const [guess, setGuess] = useState("");
+    const [attempts, setAttempts] = useState(4);
+    const [timer, setTimer] = useState(60);
+
     return (
         <View>
         <Card>
