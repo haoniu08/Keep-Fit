@@ -11,6 +11,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
     const [guess, setGuess] = useState("");
     const [attempts, setAttempts] = useState(4);
     const [timer, setTimer] = useState(60);
+    const [gameOverReason, setGameOverReason] = useState("");
     const lastDigit = phoneNum % 10;
 
     function startGame() {
@@ -19,6 +20,20 @@ export default function GameScreen( {phoneNum, onRestart} ) {
         setAttempts(4);
         setTimer(60);
     }
+
+    // timer
+    useEffect(() => {
+        if (gameState === "playing" && timer > 0) {
+            const countdown = setTimeout(() => setTimer(prev => prev - 1), 1000);
+            return () => clearTimeout(countdown);
+        } else if (timer === 0) {
+            setGameOverReason("You are out of time");
+            setGameState("gameOver");
+        }     
+    }, {timer, gameState});
+
+
+
     return (
         <Card>
           {
