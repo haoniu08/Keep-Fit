@@ -1,26 +1,55 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { Text, StyleSheet, Alert, TextInput } from 'react-native';
 import { generateTarget, checkGuess, checkGameOver } from '../utils/gameLogic';
 import Card from '../components/Card';
 import Button from '../components/Button';
 
-export default function GameScreen( phoneNum, onRestart) {
+export default function GameScreen( {phoneNum, onRestart} ) {
 
     const [gameState, setGameState] = useState("initial");
     const [targetNum, setTargetNum] = useState(null);
     const [guess, setGuess] = useState("");
     const [attempts, setAttempts] = useState(4);
     const [timer, setTimer] = useState(60);
+    const lastDigit = phoneNum % 10;
 
+    function startGame() {
+        setGameState("playing");
+        setTargetNum(generateTarget(phoneNum));
+        setAttempts(4);
+        setTimer(60);
+    }
     return (
-        <View>
         <Card>
-            <Text style={styles.text}>Welcome to the Guessing Game</Text>
-            <Text style={styles.text}>You have 10 chances to guess the number</Text>
-            <Text style={styles.text}>between 1 and 100</Text>
-            <Text style={styles.text}>Good luck!</Text>
+          {
+            gameState === "initial" && (
+            <>
+                <Text>You have 60 seconds and 4 attempts to guess a number that is 
+                    a multiply of {lastDigit} between 1 and 100.
+                </Text>
+                <Button styles={styles.buttonContainer} title={"Start"} onPress={startGame}></Button>
+            </>
+            )
+          }
+
+          {
+            gameState === "playing" &&  (
+            <>
+              <Text>Guess a number between 1 & 100 that is a multiple of {lastDigit}</Text>
+              <TextInput
+                value={guess}
+                onChangeText={setGuess}
+                keyboardType="number-pad"
+                style={styles.input}
+              > 
+              </TextInput>
+              <Text>Attempts left: {attempts}</Text>
+              <Text>Time left: {timer}</Text>
+              <Button title="Use a hint" />
+              <Button title="Submit" /> 
+            </>   
+          )}
         </Card>
-        </View>
     );
 }
 
