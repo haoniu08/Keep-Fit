@@ -30,7 +30,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
             setGameOverReason("You are out of time");
             setGameState("gameOver");
         }     
-    }, {timer, gameState});
+    }, [timer, gameState]);
 
 
 
