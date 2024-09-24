@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 
-// function to generate multiples of a number
-export const generateMultiple = (phoneNum) => {
+// function to generate the target number
+export const generateTarget = (phoneNum) => {
     const lastDigit = phoneNum % 10;
     const multiples = [];
     for (let i = 1; i <= 100; i++) {
@@ -9,14 +9,9 @@ export const generateMultiple = (phoneNum) => {
             multiples.push(i);
         }
     }
-    return multiples;
-}
-
-// function to generate a random number
-export const generateRandomNumber = () => {
     const randomNumber = Math.floor(Math.random() * multiples.length);
     return multiples[randomNumber];
-}
+};
 
 // function to check the guess
 export const checkGuess = (guess, number, phoneNum) => {
@@ -34,4 +29,9 @@ export const checkGuess = (guess, number, phoneNum) => {
     } else {
         return 'Congratulations! You got it!';
     }
-}
+};
+
+// function to check if the game is over
+export const checkGameOver = (timer, attempts) => {
+    return timer <= 0 || attempts <= 0;
+};
