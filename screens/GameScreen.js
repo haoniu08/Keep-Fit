@@ -33,7 +33,6 @@ export default function GameScreen( {phoneNum, onRestart} ) {
     }, [timer, gameState]);
 
 
-
     return (
         <Card>
           {
@@ -64,6 +63,15 @@ export default function GameScreen( {phoneNum, onRestart} ) {
               <Button title="Submit" /> 
             </>   
           )}
+          {
+            gameState === "gameOver" && (
+                <>
+                    <Text>The game is Over!</Text>
+                    <Text>{gameOverReason}</Text>
+                    <Button title="New Game" onPress={onRestart} /> 
+                </>
+            )
+          }
         </Card>
     );
 }
