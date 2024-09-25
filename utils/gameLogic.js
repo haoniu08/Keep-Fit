@@ -1,5 +1,3 @@
-import { Alert } from "react-native";
-
 // function to generate the target number
 export const generateTarget = (phoneNum) => {
     const lastDigit = phoneNum % 10;
@@ -15,19 +13,18 @@ export const generateTarget = (phoneNum) => {
 
 // function to check the guess
 export const checkGuess = (guess, number, phoneNum) => {
-    const lastDigit = phoneNum % 10;
     if (
         isNaN(guess) 
         || guess < 1 
         || guess > 100
     ) {
-        return Alert.alert('Invalid Input', `Number has to be a multiple of ${lastDigit} between 1 and 100`);
+        return "Invalid input";
     } else if (guess < number) {
-        return ' Guess is too low';
+        return 'too low';
     } else if (guess > number) {
-        return 'Guess is too high';
+        return 'too high';
     } else {
-        return 'Congratulations! You got it!';
+        return 'Congratulations!';
     }
 };
 

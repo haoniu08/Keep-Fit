@@ -11,6 +11,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
     const [guess, setGuess] = useState("");
     const [attempts, setAttempts] = useState(4);
     const [timer, setTimer] = useState(60);
+    const [wrongGuess, setWrongGuess] = useState("");
     const [gameOverReason, setGameOverReason] = useState("");
     const lastDigit = phoneNum % 10;
 
@@ -19,6 +20,27 @@ export default function GameScreen( {phoneNum, onRestart} ) {
         setTargetNum(generateTarget(phoneNum));
         setAttempts(4);
         setTimer(60);
+    }
+
+    // handle submit guess
+    function handleSubmit() { 
+        const result = checkGuess(parseInt(guess), targetNum, phoneNum);
+        if (result.includes("Congratulations")) {
+            setGameState("win");
+        } else if (result.includes("low")) {
+            setAttempts(prev => prev - 1);
+            setGameState("wrong");
+            setWrongGuess("You should guess higher");
+        } else if (result.includes("high")) {
+            setAttempts(prev => prev - 1);
+            setGameState("wrong");
+            setWrongGuess("You should guess lower");
+        } else if (result.includes("Invalid")) {
+            Alert.alert(`Invalid input", "Number has to be a multiply of ${phoneNum % 10} between 1 and 100`);
+        } else if (attempts - 1 <= 0) {
+            setGameOverReason("You are out of attempts");
+            setGameState("gameOver");
+        }
     }
 
     // timer
@@ -60,7 +82,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
               <Text>Attempts left: {attempts}</Text>
               <Text>Time left: {timer}</Text>
               <Button title="Use a hint" />
-              <Button title="Submit" /> 
+              <Button title="Submit" onPress={handleSubmit}/> 
             </>   
           )}
           {
@@ -72,6 +94,26 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                 </>
             )
           }
+            {
+                gameState === "win" && (
+                    <>
+                        <Text>Congratulations! You have guessed the number!</Text>
+                        <Button title="New Game" onPress={onRestart} /> 
+                    </>
+                )
+            }
+            {
+                gameState === "wrong" && (
+                    <>
+                        <Text>You did not guess correct!</Text> 
+                        <Text>{wrongGuess}</Text>
+                        <Button title="Try again" onPress={() => setGameState("playing")} /> 
+                        <Button title="End the game" onPress={() => setGameState("gameOver")} />    
+                    </>
+                )
+            }
+
+
         </Card>
     );
 }
