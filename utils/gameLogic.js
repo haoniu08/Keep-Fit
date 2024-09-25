@@ -8,6 +8,7 @@ export const generateTarget = (phoneNum) => {
         }
     }
     const randomNumber = Math.floor(Math.random() * multiples.length);
+    console.log(multiples[randomNumber]);
     return multiples[randomNumber];
 };
 

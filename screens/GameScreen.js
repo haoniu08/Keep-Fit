@@ -22,6 +22,13 @@ export default function GameScreen( {phoneNum, onRestart} ) {
         setTimer(60);
     }
 
+    function restartGame() {
+        setGameState("initial");
+        setGuess("");
+        setWrongGuess("");
+        setGameOverReason("");
+    }
+
     // handle submit guess
     function handleSubmit() { 
         const result = checkGuess(parseInt(guess), targetNum, phoneNum);
@@ -90,7 +97,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                 <>
                     <Text>The game is Over!</Text>
                     <Text>{gameOverReason}</Text>
-                    <Button title="New Game" onPress={onRestart} /> 
+                    <Button title="New Game" onPress={restartGame} /> 
                 </>
             )
           }
@@ -98,7 +105,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                 gameState === "win" && (
                     <>
                         <Text>Congratulations! You have guessed the number!</Text>
-                        <Button title="New Game" onPress={onRestart} /> 
+                        <Button title="New Game" onPress={restartGame} /> 
                     </>
                 )
             }
