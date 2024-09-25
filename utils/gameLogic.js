@@ -17,6 +17,8 @@ export const checkGuess = (guess, number, phoneNum) => {
         isNaN(guess) 
         || guess < 1 
         || guess > 100
+        // or if guess is not a multiple of the last digit of the phone number
+        || guess % (phoneNum % 10) !== 0
     ) {
         return "Invalid input";
     } else if (guess < number) {

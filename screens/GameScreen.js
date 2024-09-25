@@ -36,7 +36,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
             setGameState("wrong");
             setWrongGuess("You should guess lower");
         } else if (result.includes("Invalid")) {
-            Alert.alert(`Invalid input", "Number has to be a multiply of ${phoneNum % 10} between 1 and 100`);
+            Alert.alert("Invalid input", `Number has to be a multiply of ${phoneNum % 10} between 1 and 100`);
         } else if (attempts - 1 <= 0) {
             setGameOverReason("You are out of attempts");
             setGameState("gameOver");
