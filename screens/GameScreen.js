@@ -13,6 +13,8 @@ export default function GameScreen( {phoneNum, onRestart} ) {
     const [timer, setTimer] = useState(60);
     const [wrongGuess, setWrongGuess] = useState("");
     const [gameOverReason, setGameOverReason] = useState("");
+    // set up hint
+    const [hint, setHint] = useState("");
     const lastDigit = phoneNum % 10;
 
     function startGame() {
