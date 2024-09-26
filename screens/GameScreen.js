@@ -54,14 +54,15 @@ export default function GameScreen( {phoneNum, onRestart} ) {
 
     // timer
     useEffect(() => {
-        if (gameState === "playing" && timer > 0) {
-            const countdown = setTimeout(() => setTimer(prev => prev - 1), 1000);
-            return () => clearTimeout(countdown);
-        } else if (timer === 0) {
-            setGameOverReason("You are out of time");
-            setGameState("gameOver");
-        }     
-    }, [timer, gameState]);
+        if (timer > 0) {
+          const countdown = setTimeout(() => setTimer(prev => prev - 1), 1000);
+          return () => clearTimeout(countdown);
+        } else {
+          setGameState("gameOver");
+          setGameOverReason("You are out of time");
+        }
+      }, [timer]);
+    
 
 
     return (
