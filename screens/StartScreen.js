@@ -158,7 +158,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   input: {
-    borderWidth: 1,
+    // with only bottom border
+    borderBottomWidth: 1,
+    // borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
     borderRadius: 5,

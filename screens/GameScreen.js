@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, Alert, TextInput } from 'react-native';
+import { Text, StyleSheet, Alert, TextInput, View } from 'react-native';
 import { generateTarget, checkGuess, checkGameOver } from '../utils/GameLogic.js';
 import Card from '../components/Card';
 import Button from '../components/Button';
@@ -93,7 +93,9 @@ export default function GameScreen( {phoneNum, onRestart} ) {
 
     return (
         <>
-            <Button title="Restart" onPress={onRestart} />
+            <View style={styles.restartButtonContainer}>
+                <Button styles={styles.restartButton} title="Restart" onPress={onRestart} />
+            </View>
             <Card>
             {
                 gameState === "initial" && (
