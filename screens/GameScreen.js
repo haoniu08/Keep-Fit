@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, Alert, TextInput, View } from 'react-native';
-import { generateTarget, checkGuess, checkGameOver } from '../utils/GameLogic.js';
+import { generateTarget, checkGuess } from '../utils/GameLogic.js';
+import color from '../utils/ColorUtil.js';
+import styling from '../utils/StyleUtil.js';
 import Card from '../components/Card';
 import Button from '../components/Button';
 
@@ -93,10 +95,11 @@ export default function GameScreen( {phoneNum, onRestart} ) {
 
     return (
         <>
+        <View style={styles.gameScreen}>
             <View style={styles.restartButtonContainer}>
                 <Button styles={styles.restartButton} title="Restart" onPress={onRestart} />
             </View>
-            <Card>
+            <Card style={styles.gameInfo}>
             {
                 gameState === "initial" && (
                 <>
@@ -131,7 +134,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                     <>
                         <Text>The game is Over!</Text>
                         <Text>{gameOverReason}</Text>
-                        <Button title="New Game" onPress={restartGame} /> 
+                        <Button styles={styles.promptButton} title={"New Game"} onPress={restartGame} /> 
                     </>
                 )
             }
@@ -154,18 +157,30 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                     )
                 }
             </Card>
+        </View>
+            
         </>
     );
 }
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 16,
-        marginBottom: 10,
+    gameScreen: {
+        width: '100%',
+        flex: 1,
+        justifyContent: styling.centerPosition,
+        alignItems: styling.centerPosition,
     },
-    restartButtonContainer:{
-        position: 'absolute',
-        right: 10,
-        top: 150,
-    }
+    restartButtonContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: 5,
+    },
+    gameInfo: {
+        flexShrink: 1,
+        justifyContent: 'center',
+    },
+    promptButton: {
+        color: color.blue,
+    },
 });

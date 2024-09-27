@@ -1,4 +1,3 @@
-import react from "react";
 import { StyleSheet, View } from "react-native";
 
 export default function Card({ children, style }) {
