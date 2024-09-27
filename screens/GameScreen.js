@@ -163,4 +163,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 10,
     },
+    restartButtonContainer:{
+        position: 'absolute',
+        right: 10,
+        top: 150,
+    }
 });
