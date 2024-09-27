@@ -10,6 +10,7 @@ export default {
     backgroundGradientEnd: 'rgba(106, 90, 205, 0.8)', // Slate Blue with 0.8 opacity
     black: '#000000',
     white: '#FFFFFF',
+    deepPink: '#FF1493',
     red: '#FF0000',
     gray: '#808080',
     darkGray: '#A9A9A9',

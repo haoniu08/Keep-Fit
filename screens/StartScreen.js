@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, Button, View, TouchableOpacity, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import colors from '../utils/ColorUtil.js';
 import React, { useState } from 'react';
 import Card from '../components/Card';
 
@@ -128,14 +129,14 @@ export default function StartScreen( {onRegister} ) {
             <Text style={styles.resetButtonText}>Reset</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[
-              styles.registerButton,
-              { backgroundColor: isChecked ? '#0000FF' : '#ccc' }
-            ]}
+            style={styles.registerButton}
             disabled={!isChecked}
             onPress={handleRegisterPress}
           >
-            <Text style={styles.registerButtonText}>Register</Text>
+            <Text style={[
+              styles.registerButtonText, 
+              {color: isChecked ? colors.blue : colors.darkGray }
+              ]}>Register</Text>
           </TouchableOpacity>
         </View>
       </Card>
@@ -179,18 +180,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   resetButton: {
-    backgroundColor: '#ff0000',
     padding: 10,
     borderRadius: 5,
   },
   resetButtonText: {
-    color: '#fff',
+    fontSize: 20,
+    color: colors.deepPink,
   },
   registerButton: {
     padding: 10,
     borderRadius: 5,
   },
   registerButtonText: {
-    color: '#fff',
+    fontSize: 20,
+    color: colors.blue,
   },
 });

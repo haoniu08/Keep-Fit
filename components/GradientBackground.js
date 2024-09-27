@@ -2,7 +2,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-// import colors from '../config/colors';
 import colors from '../utils/ColorUtil.js';
 
 const GradientBackground = ({ children }) => {
