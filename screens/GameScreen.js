@@ -15,40 +15,66 @@ export default function GameScreen( {phoneNum, onRestart} ) {
     const [gameOverReason, setGameOverReason] = useState("");
     // set up hint
     const [hint, setHint] = useState("");
+    const [hintUsed, setHintUsed] = useState(false);
     const lastDigit = phoneNum % 10;
 
+    function resetGameState() {
+        setGuess("");
+        setWrongGuess("");
+        setGameOverReason("");
+        setHint("");
+        setHintUsed(false);
+    }
+    
     function startGame() {
+        resetGameState();
         setGameState("playing");
         setTargetNum(generateTarget(phoneNum));
         setAttempts(4);
         setTimer(60);
     }
-
+    
     function restartGame() {
+        resetGameState();
         setGameState("initial");
-        setGuess("");
-        setWrongGuess("");
-        setGameOverReason("");
     }
 
     // handle submit guess
     function handleSubmit() { 
         const result = checkGuess(parseInt(guess), targetNum, phoneNum);
+    
         if (result.includes("Congratulations")) {
             setGameState("win");
-        } else if (result.includes("low")) {
-            setAttempts(prev => prev - 1);
-            setGameState("wrong");
-            setWrongGuess("You should guess higher");
-        } else if (result.includes("high")) {
-            setAttempts(prev => prev - 1);
-            setGameState("wrong");
-            setWrongGuess("You should guess lower");
         } else if (result.includes("Invalid")) {
-            Alert.alert("Invalid input", `Number has to be a multiply of ${phoneNum % 10} between 1 and 100`);
-        } else if (attempts - 1 <= 0) {
-            setGameOverReason("You are out of attempts");
-            setGameState("gameOver");
+            Alert.alert("Invalid input", `Number has to be a multiple of ${phoneNum % 10} between 1 and 100`);
+        } else {
+            setAttempts(prev => {
+                const newAttempts = prev - 1;
+                if (newAttempts <= 0) {
+                    setGameOverReason("You are out of attempts");
+                    setGameState("gameOver");
+                } else {
+                    if (result.includes("low")) {
+                        setGameState("wrong");
+                        setWrongGuess("You should guess higher");
+                    } else if (result.includes("high")) {
+                        setGameState("wrong");
+                        setWrongGuess("You should guess lower");
+                    }
+                }
+                return newAttempts;
+            });
+        }
+    }
+
+    function handleUseHint () {
+        if (!hintUsed) {
+            setHintUsed(true);
+            if (targetNum <= 50) {
+                setHint("The number is between 1 and 50");
+            } else {
+                setHint("The number is between 51 and 100");
+            }
         }
     }
 
@@ -89,9 +115,10 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                 style={styles.input}
               > 
               </TextInput>
+              <Text>{hint}</Text>
               <Text>Attempts left: {attempts}</Text>
               <Text>Time left: {timer}</Text>
-              <Button title="Use a hint" />
+              <Button title="Use a hint" onPress={handleUseHint} disabled={hintUsed}/>
               <Button title="Submit" onPress={handleSubmit}/> 
             </>   
           )}
@@ -122,8 +149,6 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                     </>
                 )
             }
-
-
         </Card>
     );
 }
