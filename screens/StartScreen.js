@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'skyblue',
   },
   label: {
     fontSize: 16,
