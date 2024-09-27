@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, Alert, TextInput } from 'react-native';
-import { generateTarget, checkGuess, checkGameOver } from '../utils/gameLogic';
+import { generateTarget, checkGuess, checkGameOver } from '../utils/GameLogic.js';
 import Card from '../components/Card';
 import Button from '../components/Button';
 

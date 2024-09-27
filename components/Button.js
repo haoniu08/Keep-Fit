@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     buttonText: {
-        // color: 'white',
+        color: 'black',
         fontSize: 20,
         textAlign: 'center',
     },
