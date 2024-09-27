@@ -4,6 +4,7 @@ import Header from './components/Header';
 import StartScreen from './screens/StartScreen';
 import ConfirmScreen from './screens/ConfirmScreen';
 import GameScreen from './screens/GameScreen';
+import GradientBackground from './components/GradientBackground';
 
 export default function App() {
 
@@ -43,40 +44,39 @@ export default function App() {
   }
 
   return (
+    <GradientBackground>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.topSection}>
+          <Header name={appName} />
+        </View>
 
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.topSection}>
-        <Header name={appName} />
-      </View>
-
-      <View style={styles.mainArea}>
-        {navigateScreen(currentScreen)}
-        <ConfirmScreen 
-          isVisible={isConfirmVisible} 
-          userInfo={userInfo}
-          onGoBack={handleGoBack}
-          onContinue={handleContinue}
-        />
-      </View>
-    </ SafeAreaView>
+        <View style={styles.mainArea}>
+          {navigateScreen(currentScreen)}
+          <ConfirmScreen 
+            isVisible={isConfirmVisible} 
+            userInfo={userInfo}
+            onGoBack={handleGoBack}
+            onContinue={handleContinue}
+          />
+        </View>
+      </ SafeAreaView>
+    </GradientBackground>
+    
   );
 }
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: 'lightblue',
   },
   topSection: {
     flex: 1,
-    backgroundColor: 'steelblue',
     alignItems: 'center',
     justifyContent: 'center',
   },
   mainArea: {
     flex: 5,
     width: '100%',
-    backgroundColor: 'skyblue',
     alignItems: 'center',
     justifyContent: 'center',
   },
