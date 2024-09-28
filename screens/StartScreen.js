@@ -4,6 +4,8 @@ import Checkbox from 'expo-checkbox';
 import colors from '../utils/ColorUtil.js';
 import React, { useState } from 'react';
 import Card from '../components/Card';
+import CustomButton from '../components/Button';
+import styling from '../utils/StyleUtil.js';
 
 export default function StartScreen( {onRegister} ) {
 
@@ -123,21 +125,23 @@ export default function StartScreen( {onRegister} ) {
           <Text style={styles.checkboxLabel}>I am not a robot</Text>
         </View>
 
-        {/* Buttons */}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
-            <Text style={styles.resetButtonText}>Reset</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.registerButton}
-            disabled={!isChecked}
-            onPress={handleRegisterPress}
-          >
-            <Text style={[
-              styles.registerButtonText, 
-              {color: isChecked ? colors.blue : colors.darkGray }
-              ]}>Register</Text>
-          </TouchableOpacity>
+            <CustomButton
+                customStyle={styles.resetButton}
+                textStyle={styles.resetButtonText}
+                title="Reset"
+                onPress={handleReset}
+            />
+            <CustomButton
+                customStyle={styles.registerButton}
+                textStyle={[
+                    styles.registerButtonText,
+                    { color: isChecked ? colors.blue : colors.darkGray }
+                ]}
+                title="Register"
+                onPress={handleRegisterPress}
+                disabled={!isChecked}
+            />
         </View>
       </Card>
 
@@ -178,23 +182,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: styling.rowDirection,
+    justifyContent: styling.spaceBetween,
   },
   resetButton: {
-    padding: 10,
-    borderRadius: 5,
+    padding: styling.mediumPadding,
+    borderRadius: styling.smallBorderRadius,
   },
   resetButtonText: {
-    fontSize: 20,
+    fontSize: styling.mediumFontSize,
     color: colors.deepPink,
   },
   registerButton: {
-    padding: 10,
-    borderRadius: 5,
+    padding: styling.mediumPadding,
+    borderRadius: styling.smallBorderRadius,
   },
   registerButtonText: {
-    fontSize: 20,
+    fontSize: styling.mediumFontSize,
     color: colors.blue,
   },
 });
