@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, Button, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import colors from '../utils/ColorUtil.js';
 import React, { useState } from 'react';
 import Card from '../components/Card';
+import CustomText from '../components/CustomText.js';
 import CustomButton from '../components/Button';
 import styling from '../utils/StyleUtil.js';
 
@@ -86,43 +87,43 @@ export default function StartScreen( {onRegister} ) {
     <View style={styles.screen}>
       <Card style={styles.card}>
         {/* Name Input */}
-        <Text style={styles.label}>Name</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Please enter your name"
-          onChangeText={validateName}
-          value={name}
-        />
-        {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
+        <CustomText style={styles.label}>Name</CustomText>
+            <TextInput
+                style={styles.input}
+                placeholder="Please enter your name"
+                onChangeText={validateName}
+                value={name}
+            />
+            {nameError ? <CustomText style={styles.errorText}>{nameError}</CustomText> : null}
 
-        {/* Email Input */}
-        <Text style={styles.label}>Email address</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Please enter your email"
-          onChangeText={validateEmail}
-          value={email}
-        />
-        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+            {/* Email Input */}
+            <CustomText style={styles.label}>Email address</CustomText>
+            <TextInput
+                style={styles.input}
+                placeholder="Please enter your email"
+                onChangeText={validateEmail}
+                value={email}
+            />
+            {emailError ? <CustomText style={styles.errorText}>{emailError}</CustomText> : null}
 
-        {/* Phone Number Input */}
-        <Text style={styles.label}>Phone Number</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Please Enter your phone number"
-          onChangeText={validatePhoneNum}
-          value={phoneNum}
-        />
-        {phoneNumError ? <Text style={styles.errorText}>{phoneNumError}</Text> : null}
+            {/* Phone Number Input */}
+            <CustomText style={styles.label}>Phone Number</CustomText>
+            <TextInput
+                style={styles.input}
+                placeholder="Please Enter your phone number"
+                onChangeText={validatePhoneNum}
+                value={phoneNum}
+            />
+            {phoneNumError ? <CustomText style={styles.errorText}>{phoneNumError}</CustomText> : null}
 
-        {/* Checkbox */}
-        <View style={styles.checkboxContainer}>
-          <Checkbox
-            value={isChecked}
-            onValueChange={setIsChecked}
-            style={styles.checkbox}
-          />
-          <Text style={styles.checkboxLabel}>I am not a robot</Text>
+            {/* Checkbox */}
+            <View style={styles.checkboxContainer}>
+                <Checkbox
+                    value={isChecked}
+                    onValueChange={setIsChecked}
+                    style={styles.checkbox}
+                />
+                <CustomText style={styles.checkboxLabel}>I am not a robot</CustomText>
         </View>
 
         <View style={styles.buttonContainer}>
@@ -158,8 +159,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    fontSize: 16,
-    marginBottom: 5,
+    fontSize: styling.mediumFontSize,
+    color: colors.purple,
+    marginBottom: styling.smallMargin,
   },
   input: {
     // with only bottom border
@@ -171,15 +173,17 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
+    flexDirection: styling.rowDirection,
+    alignItems: styling.centerPosition,
+    marginBottom: styling.mediumMargin,
   },
   checkbox: {
-    marginRight: 10,
+    marginRight: styling.mediumMargin,
   },
   checkboxLabel: {
-    fontSize: 16,
+    marginTop: styling.mediumMargin,
+    color: colors.purple,
+    fontSize: styling.smallFontSize,
   },
   buttonContainer: {
     flexDirection: styling.rowDirection,

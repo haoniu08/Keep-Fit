@@ -17,6 +17,6 @@ export default {
     darkGray: '#A9A9A9',
     silver: '#C0C0C0',
     lightGray: '#D3D3D3',
-    purple: '#800080',
+    purple: '#9400D3',
     darkOrchid: '#9932CC',
 }

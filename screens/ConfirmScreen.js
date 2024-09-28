@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, Modal, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import styling from '../utils/StyleUtil.js';
 import colors from '../utils/ColorUtil.js';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import CustomText from '../components/CustomText.js';
 
 
 export default function ConfirmScreen({ isVisible, userInfo, onGoBack, onContinue }) {
@@ -11,25 +13,26 @@ export default function ConfirmScreen({ isVisible, userInfo, onGoBack, onContinu
     <View>
       <Modal visible={isVisible} transparent>
       <LinearGradient
-          colors={[
-            colors.backgroundGradientStart, 
-            colors.backgroundGradientMiddle, 
-            colors.backgroundGradientEnd]}
-          style={styles.gradientBackground}
+            colors={[
+                colors.backgroundGradientStart, 
+                colors.backgroundGradientMiddle, 
+                colors.backgroundGradientEnd
+            ]}
+            style={styles.gradientBackground}
         >
-          <View style={styles.centeredView}>
-            <Card>
-              <Text style={styles.text}>Hello {userInfo.name}</Text>
-              <Text style={styles.text}>Here is the information you entered:</Text>
-              <Text style={styles.text}>{userInfo.email}</Text>
-              <Text style={styles.text}>{userInfo.phoneNum}</Text>
-              <Text style={styles.text}>If it is not correct, please go back and edit then</Text>
-              <View style={styles.buttonContainer}>
-                <Button title="Go back" onPress={onGoBack} customStyle={styles.goBackButton}/>
-                <Button title="Continue" onPress={onContinue} customStyle={styles.continueButton}/>
-              </View>
-            </Card> 
-          </View>
+            <View style={styles.centeredView}>
+                <Card>
+                    <CustomText style={styles.text}>Hello {userInfo.name}</CustomText>
+                    <CustomText style={styles.text}>Here is the information you entered:</CustomText>
+                    <CustomText style={styles.text}>{userInfo.email}</CustomText>
+                    <CustomText style={styles.text}>{userInfo.phoneNum}</CustomText>
+                    <CustomText style={styles.text}>If it is not correct, please go back and edit then</CustomText>
+                    <View style={styles.buttonContainer}>
+                        <Button title="Go back" onPress={onGoBack} textStyle={styles.goBackButton}/>
+                        <Button title="Continue" onPress={onContinue} textStyle={styles.continueButton}/>
+                    </View>
+                </Card> 
+            </View>
         </LinearGradient>
       </Modal>
     </View>
@@ -42,30 +45,24 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: styling.centerPosition,
+    alignItems: styling.centerPosition,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   text: {
-    fontSize: 16,
-    marginBottom: 10,
+    color: colors.purple,
+    fontSize: styling.mediumFontSize,
+    marginBottom: styling.smallMargin,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
+    flexDirection: styling.rowDirection,
+    justifyContent: styling.spaceBetween,
+    marginTop: styling.mediumMargin,
   },
   goBackButton: {
-    backgroundColor: '#ff0000', // Red
-    flex: 1,
-    marginRight: 10,
-    padding: 10,
-    alignItems: 'center',
+    color: colors.deepPink,
   },
   continueButton: {
-    backgroundColor: '#0000FF', // Blue
-    flex: 1,
-    padding: 10,
-    alignItems: 'center',
+    color: colors.blue,
   },
 });
