@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, Alert, TextInput, View } from 'react-native';
+import { StyleSheet, Alert, View, Image } from 'react-native';
 import { generateTarget, checkGuess } from '../utils/GameLogic.js';
 import CustomText from '../components/CustomText.js';
 import CustomTextInput from '../components/CustomTextInput.js';
@@ -146,6 +146,10 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                 gameState === "gameOver" && (
                     <>
                         <CustomText style={styles.text}>The game is Over!</CustomText>
+                        <Image
+                            source={require('../assets/sad_smiley.png')}
+                            style={styles.image}
+                        />
                         <CustomText style={styles.text}>{gameOverReason}</CustomText>
                         <Button textStyle={styles.buttonText} title={"New Game"} onPress={restartGame} /> 
                     </>
@@ -156,6 +160,10 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                         <>
                             <CustomText style={styles.text}>Congratulations! You have guessed the number!</CustomText>
                             <CustomText style={styles.text}>Attempts used: { 4 - attempts }</CustomText>
+                            <Image
+                                source={{uri: `https://picsum.photos/id/${targetNum}/100/100` }}
+                                style={styles.image}
+                            />
                             <Button textStyle={styles.buttonText} title="New Game" onPress={restartGame} /> 
                         </>
                     )
@@ -210,7 +218,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: styling.mediumFontSize,
         textAlign: styling.centerPosition,
-        padding: styling.smallPaddin6g,
+        padding: styling.smallPadding,
         color: color.purple,
     },
     promptText: {
@@ -226,5 +234,11 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         alignItems: styling.centerPosition,
+    },
+    image : {
+        alignSelf: styling.centerPosition,
+        margin: styling.mediumMargin,
+        width: 150,
+        height: 150,
     }
 });
