@@ -18,6 +18,8 @@ export default {
     largeFontSize: 25,
     extraLargeFontSize: 30,
 
+    boldFont: 'bold',
+
     centerPosition: 'center',
     rowDirection: 'row',
     spaceBetween: 'space-between',

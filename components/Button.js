@@ -24,6 +24,7 @@ const Button = ({
         >
             <CustomText style={[
                 styles.buttonText,
+                textStyle,
                 disabled ? disabledTextStyle : textStyle  // Apply the correct text style based on the disabled state
             ]}>
                 {title}

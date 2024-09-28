@@ -47,6 +47,9 @@ export default function GameScreen( {phoneNum, onRestart} ) {
         const result = checkGuess(parseInt(guess), targetNum, phoneNum);
     
         if (result.includes("Congratulations")) {
+            if (attempts === 4) {
+                setAttempts(3);
+            }
             setGameState("win");
         } else if (result.includes("Invalid")) {
             Alert.alert("Invalid input", `Number has to be a multiple of ${phoneNum % 10} between 1 and 100`);
@@ -98,16 +101,16 @@ export default function GameScreen( {phoneNum, onRestart} ) {
         <>
         <View style={styles.gameScreen}>
             <View style={styles.restartButtonContainer}>
-                <Button styles={styles.restartButton} title="Restart" onPress={onRestart} />
+                <Button textStyle={styles.restartButton} title="Restart" onPress={onRestart} />
             </View>
             <Card style={styles.gameInfo}>
             {
                 gameState === "initial" && (
                 <>
-                    <Text>You have 60 seconds and 4 attempts to guess a number that is 
+                    <CustomText style={styles.text}>You have 60 seconds and 4 attempts to guess a number that is 
                         a multiply of {lastDigit} between 1 and 100.
-                    </Text>
-                    <Button styles={styles.buttonContainer} title={"Start"} onPress={startGame}></Button>
+                    </CustomText>
+                    <Button textStyle={styles.buttonText} title={"Start"} onPress={startGame}></Button>
                 </>
                 )
             }
@@ -115,7 +118,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
             {
                 gameState === "playing" &&  (
                 <>
-                <Text>Guess a number between 1 & 100 that is a multiple of {lastDigit}</Text>
+                <CustomText style={styles.text}>Guess a number between 1 & 100 that is a multiple of {lastDigit}</CustomText>
                 <TextInput
                     value={guess}
                     onChangeText={setGuess}
@@ -123,43 +126,44 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                     style={styles.input}
                 > 
                 </TextInput>
-                <Text>{hint}</Text>
-                <Text>Attempts left: {attempts}</Text>
-                <Text>Time left: {timer}</Text>
+                <CustomText style={styles.promptText}>{hint}</CustomText>
+                <CustomText style={styles.promptText}>Attempts left: {attempts}</CustomText>
+                <CustomText style={styles.promptText}>Time left: {timer}</CustomText>
                 <Button 
                     title="Use a hint" 
                     onPress={handleUseHint} 
                     disabled={hintUsed}
-                    // textStyle={{ color: color.blue }}  // Normal text color
+                    textStyle={styles.buttonText}
                     disabledTextStyle={{ color: color.gray }}  // Disabled text color
 />
-                <Button title="Submit" onPress={handleSubmit}/> 
+                <Button title="Submit" onPress={handleSubmit} textStyle={{color: color.blue}}/> 
                 </>   
             )}
             {
                 gameState === "gameOver" && (
                     <>
-                        <Text>The game is Over!</Text>
-                        <Text>{gameOverReason}</Text>
-                        <Button styles={styles.promptButton} title={"New Game"} onPress={restartGame} /> 
+                        <CustomText style={styles.text}>The game is Over!</CustomText>
+                        <CustomText style={styles.text}>{gameOverReason}</CustomText>
+                        <Button textStyle={styles.buttonText} title={"New Game"} onPress={restartGame} /> 
                     </>
                 )
             }
                 {
                     gameState === "win" && (
                         <>
-                            <Text>Congratulations! You have guessed the number!</Text>
-                            <Button title="New Game" onPress={restartGame} /> 
+                            <CustomText style={styles.text}>Congratulations! You have guessed the number!</CustomText>
+                            <CustomText style={styles.text}>Attempts used: { 4 - attempts }</CustomText>
+                            <Button textStyle={styles.buttonText} title="New Game" onPress={restartGame} /> 
                         </>
                     )
                 }
                 {
                     gameState === "wrong" && (
                         <>
-                            <Text>You did not guess correct!</Text> 
-                            <Text>{wrongGuess}</Text>
-                            <Button title="Try again" onPress={() => setGameState("playing")} /> 
-                            <Button title="End the game" onPress={() => setGameState("gameOver")} />    
+                            <CustomText style={styles.text}>You did not guess correct!</CustomText> 
+                            <CustomText style={styles.text}>{wrongGuess}</CustomText>
+                            <Button textStyle={styles.buttonText} title="Try again" onPress={() => setGameState("playing")} /> 
+                            <Button textStyle={styles.buttonText} title="End the game" onPress={() => setGameState("gameOver")} />    
                         </>
                     )
                 }
@@ -172,23 +176,42 @@ export default function GameScreen( {phoneNum, onRestart} ) {
 
 const styles = StyleSheet.create({
     gameScreen: {
-        width: '100%',
+        width: styling.fullWidth,
         flex: 1,
         justifyContent: styling.centerPosition,
         alignItems: styling.centerPosition,
     },
     restartButtonContainer: {
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
+        width: styling.fullWidth,
+        flexDirection: styling.rowDirection,
+        justifyContent: styling.rightFlexAlign,
         paddingRight: styling.largePadding,
         padding: 5,
     },
+    restartButton: {
+        padding: styling.mediumPadding,
+        color: color.white,
+        fontWeight: styling.boldFont,
+        borderRadius: styling.mediumBorderRadius,
+    },
     gameInfo: {
         flexShrink: 1,
-        justifyContent: 'center',
+        justifyContent: styling.centerPosition,
     },
     disabledText: {
+        color: color.gray,
+    },
+    buttonText: {
+        color: color.blue,
+    },
+    text: {
+        textAlign: styling.centerPosition,
+        padding: styling.smallPaddin6g,
+        color: color.purple,
+    },
+    promptText: {
+        fontSize: styling.smallFontSize,
+        textAlign: styling.centerPosition,  
         color: color.gray,
     },
 });
