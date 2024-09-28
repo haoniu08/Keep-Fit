@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, Alert, TextInput, View } from 'react-native';
 import { generateTarget, checkGuess } from '../utils/GameLogic.js';
 import CustomText from '../components/CustomText.js';
+import CustomTextInput from '../components/CustomTextInput.js';
 import color from '../utils/ColorUtil.js';
 import styling from '../utils/StyleUtil.js';
 import Card from '../components/Card';
@@ -119,13 +120,15 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                 gameState === "playing" &&  (
                 <>
                 <CustomText style={styles.text}>Guess a number between 1 & 100 that is a multiple of {lastDigit}</CustomText>
-                <TextInput
-                    value={guess}
-                    onChangeText={setGuess}
-                    keyboardType="number-pad"
-                    style={styles.input}
-                > 
-                </TextInput>
+                <View style={styles.inputContainer}>
+                    <CustomTextInput
+                        value={guess}
+                        onChangeText={setGuess}
+                        keyboardType="number-pad"
+                        style={styles.input}
+                    />
+                </View>    
+                
                 <CustomText style={styles.promptText}>{hint}</CustomText>
                 <CustomText style={styles.promptText}>Attempts left: {attempts}</CustomText>
                 <CustomText style={styles.promptText}>Time left: {timer}</CustomText>
@@ -186,7 +189,7 @@ const styles = StyleSheet.create({
         flexDirection: styling.rowDirection,
         justifyContent: styling.rightFlexAlign,
         paddingRight: styling.largePadding,
-        padding: 5,
+        padding: styling.smallPadding,
     },
     restartButton: {
         padding: styling.mediumPadding,
@@ -205,6 +208,7 @@ const styles = StyleSheet.create({
         color: color.blue,
     },
     text: {
+        fontSize: styling.mediumFontSize,
         textAlign: styling.centerPosition,
         padding: styling.smallPaddin6g,
         color: color.purple,
@@ -214,4 +218,13 @@ const styles = StyleSheet.create({
         textAlign: styling.centerPosition,  
         color: color.gray,
     },
+    input: {
+        marginTop: styling.mediumMargin,
+        fontSize: styling.mediumFontSize,
+        alignItems: styling.centerPosition,
+        paddingHorizontal: styling.mediumPadding,
+    },
+    inputContainer: {
+        alignItems: styling.centerPosition,
+    }
 });

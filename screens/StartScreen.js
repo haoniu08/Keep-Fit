@@ -5,6 +5,7 @@ import colors from '../utils/ColorUtil.js';
 import React, { useState } from 'react';
 import Card from '../components/Card';
 import CustomText from '../components/CustomText.js';
+import CustomTextInput from '../components/CustomTextInput.js';
 import CustomButton from '../components/Button';
 import styling from '../utils/StyleUtil.js';
 
@@ -88,7 +89,7 @@ export default function StartScreen( {onRegister} ) {
       <Card style={styles.card}>
         {/* Name Input */}
         <CustomText style={styles.label}>Name</CustomText>
-            <TextInput
+            <CustomTextInput
                 style={styles.input}
                 placeholder="Please enter your name"
                 onChangeText={validateName}
@@ -98,7 +99,7 @@ export default function StartScreen( {onRegister} ) {
 
             {/* Email Input */}
             <CustomText style={styles.label}>Email address</CustomText>
-            <TextInput
+            <CustomTextInput
                 style={styles.input}
                 placeholder="Please enter your email"
                 onChangeText={validateEmail}
@@ -108,7 +109,7 @@ export default function StartScreen( {onRegister} ) {
 
             {/* Phone Number Input */}
             <CustomText style={styles.label}>Phone Number</CustomText>
-            <TextInput
+            <CustomTextInput
                 style={styles.input}
                 placeholder="Please Enter your phone number"
                 onChangeText={validatePhoneNum}
@@ -124,7 +125,7 @@ export default function StartScreen( {onRegister} ) {
                     style={styles.checkbox}
                 />
                 <CustomText style={styles.checkboxLabel}>I am not a robot</CustomText>
-        </View>
+            </View>
 
         <View style={styles.buttonContainer}>
             <CustomButton
@@ -145,7 +146,6 @@ export default function StartScreen( {onRegister} ) {
             />
         </View>
       </Card>
-
       <StatusBar style="auto" />
     </View>
   );
@@ -154,23 +154,19 @@ export default function StartScreen( {onRegister} ) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: styling.fullWidth,
+    justifyContent: styling.centerPosition,
+    alignItems: styling.centerPosition,
   },
   label: {
     fontSize: styling.mediumFontSize,
     color: colors.purple,
-    marginBottom: styling.smallMargin,
+    marginTop: styling.mediumMargin,
   },
   input: {
-    // with only bottom border
-    borderBottomWidth: 1,
-    // borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 15,
+    fontSize: styling.mediumFontSize,
+    padding: styling.mediumPadding,
+    marginBottom: styling.mediumMargin,
   },
   checkboxContainer: {
     flexDirection: styling.rowDirection,
@@ -178,6 +174,7 @@ const styles = StyleSheet.create({
     marginBottom: styling.mediumMargin,
   },
   checkbox: {
+    marginTop: styling.mediumMargin,
     marginRight: styling.mediumMargin,
   },
   checkboxLabel: {
@@ -205,4 +202,8 @@ const styles = StyleSheet.create({
     fontSize: styling.mediumFontSize,
     color: colors.blue,
   },
+  errorText: {
+    color: colors.gray,
+    marginBottom: styling.smallMargin,
+  }
 });
