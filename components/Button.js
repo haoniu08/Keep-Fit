@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import CustomText from './CustomText.js';
 import styling from '../utils/StyleUtil.js';
 import color from '../utils/ColorUtil.js';
 
@@ -21,13 +22,12 @@ const Button = ({
             onPress={onPress}
             disabled={disabled}
         >
-            <Text style={[
+            <CustomText style={[
                 styles.buttonText,
-                textStyle,
-                disabled ? disabledTextStyle : {}
-                ]}>
+                disabled ? disabledTextStyle : textStyle  // Apply the correct text style based on the disabled state
+            ]}>
                 {title}
-            </Text>
+            </CustomText>
         </TouchableOpacity>
     );
 };
@@ -44,7 +44,10 @@ const styles = StyleSheet.create({
         textAlign: styling.centerPosition,
     },
     disabled: {
-        backgroundColor: color.gray,
+        // backgroundColor: color.lightGray,
+    },
+    disabledText: {
+        color: color.gray,
     },
 });
 

@@ -17,10 +17,14 @@ export default {
     mediumFontSize: 20,
     largeFontSize: 25,
     extraLargeFontSize: 30,
-    
+
     centerPosition: 'center',
     rowDirection: 'row',
     spaceBetween: 'space-between',
     rightFlexAlign: 'flex-end',
     leftFlexAlign: 'flex-start',
+
+    fullWidth: '100%',
+    fullHeight: '100%',
+    autoPosition: 'auto',
 }

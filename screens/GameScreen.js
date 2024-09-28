@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, Alert, TextInput, View } from 'react-native';
 import { generateTarget, checkGuess } from '../utils/GameLogic.js';
+import CustomText from '../components/CustomText.js';
 import color from '../utils/ColorUtil.js';
 import styling from '../utils/StyleUtil.js';
 import Card from '../components/Card';
@@ -125,7 +126,13 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                 <Text>{hint}</Text>
                 <Text>Attempts left: {attempts}</Text>
                 <Text>Time left: {timer}</Text>
-                <Button title="Use a hint" onPress={handleUseHint} disabled={hintUsed}/>
+                <Button 
+                    title="Use a hint" 
+                    onPress={handleUseHint} 
+                    disabled={hintUsed}
+                    // textStyle={{ color: color.blue }}  // Normal text color
+                    disabledTextStyle={{ color: color.gray }}  // Disabled text color
+/>
                 <Button title="Submit" onPress={handleSubmit}/> 
                 </>   
             )}
@@ -174,13 +181,14 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'flex-end',
+        paddingRight: styling.largePadding,
         padding: 5,
     },
     gameInfo: {
         flexShrink: 1,
         justifyContent: 'center',
     },
-    promptButton: {
-        color: color.blue,
+    disabledText: {
+        color: color.gray,
     },
 });
