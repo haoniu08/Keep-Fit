@@ -48,9 +48,6 @@ export default function GameScreen( {phoneNum, onRestart} ) {
         const result = checkGuess(parseInt(guess), targetNum, phoneNum);
     
         if (result.includes("Congratulations")) {
-            if (attempts === 4) {
-                setAttempts(3);
-            }
             setGameState("win");
         } else if (result.includes("Invalid")) {
             Alert.alert("Invalid input", `Number has to be a multiple of ${phoneNum % 10} between 1 and 100`);
@@ -94,7 +91,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
           setGameState("gameOver");
           setGameOverReason("You are out of time");
         }
-      }, [timer]);
+    }, [timer]);
     
 
 
@@ -159,7 +156,7 @@ export default function GameScreen( {phoneNum, onRestart} ) {
                     gameState === "win" && (
                         <>
                             <CustomText style={styles.text}>Congratulations! You have guessed the number!</CustomText>
-                            <CustomText style={styles.text}>Attempts used: { 4 - attempts }</CustomText>
+                            <CustomText style={styles.text}>Attempts used: { 4 - attempts + 1 }</CustomText>
                             <Image
                                 source={{uri: `https://picsum.photos/id/${targetNum}/100/100` }}
                                 style={styles.image}
