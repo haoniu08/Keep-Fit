@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Alert, View, Image } from 'react-native';
-import { generateTarget, checkGuess } from '../utils/GameLogic.js';
+import { generateTarget, checkGuess } from '../utils/GameLogicRename.js';
 import CustomText from '../components/CustomText.js';
 import CustomTextInput from '../components/CustomTextInput.js';
 import color from '../utils/ColorUtil.js';
