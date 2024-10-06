@@ -1,3 +1,5 @@
+// tesing GameLogic file name???
+
 // function to generate the target number
 export const generateTarget = (phoneNum) => {
     const lastDigit = phoneNum % 10;
